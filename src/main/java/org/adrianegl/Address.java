@@ -1,5 +1,11 @@
 package org.adrianegl;
 
+import lombok.*;
+
+@ToString
+@EqualsAndHashCode
+@Getter
+@Setter
 public class Address {
     private int streetNo;
     private String street;
@@ -7,7 +13,24 @@ public class Address {
     private Province province;
     private String postalCode;
 
-    public enum Province{
+    public Address(int streetNo, String street, String city, Province province, String postalCode) {
+        if (isPostalCodeValid(postalCode)) {
+            this.streetNo = streetNo;
+            this.street = street;
+            this.city = city;
+            this.province = province;
+            this.postalCode = postalCode;
+        }
+        else {
+            this.streetNo = Integer.parseInt(null);
+            this.street = null;
+            this.city = null;
+            this.province = null;
+            this.postalCode = null;
+        }
+    }
+
+    public enum Province {
         AB, BC, MB, NB, NL, NS, ON, PE, QC, SK
     }
 
